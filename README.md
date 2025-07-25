@@ -3,7 +3,7 @@ Scrapes the national lottery website and notify users through a Discord webhook 
 
 v1 returns the following in the notification:
 
-🎰 National Lottery Weekly Update DD/MM/YYYY
+🎰 National Lottery Daily Update DD/MM/YYYY
 - Lotto: £11.3M
 - Lotto Hotpicks: £350K
 - Euromillions: £119M
