@@ -43,4 +43,4 @@ if __name__ == '__main__':
     jackpots = get_jackpots()
     message = format_for_notification(jackpots)
     print("Sending to Discord:\n", message)
-    #send_to_discord(message)
+    send_to_discord(message)
