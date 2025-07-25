@@ -23,7 +23,7 @@ def get_jackpots():
 def format_for_notification(jackpots):
     today = date.today()
     format_today = today.strftime("%d/%m/%Y")
-    lines = [f"🎰 **National Lottery Weekly Update {format_today}**"]
+    lines = [f"🎰 **National Lottery Daily Update {format_today}**"]
     for game, amount in jackpots.items():
         game = game.replace('Next Draw', '').strip().title()
         lines.append(f"- {game}: {amount}")
