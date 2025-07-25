@@ -11,4 +11,4 @@ v1 returns the following in the notification:
 - Thunderball: £500K
 
 v2 TBC
-I want to next have the app show the days each draw is run on and if the value for an upcoming jackpot is higher than averge.
+I want to next have the app show the days each draw is run on and if the value for an upcoming jackpot is higher than average.
