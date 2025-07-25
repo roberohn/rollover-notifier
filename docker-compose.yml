@@ -1,0 +1,7 @@
+services:
+  jackpotbot:
+    build: .
+    container_name: jackpot_notifier
+    restart: always
+    env_file:
+      - .env
