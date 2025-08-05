@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from os import getenv
 from datetime import date
+from db import create_table, save_jackpots
 
 def get_jackpots():
     url = "https://www.national-lottery.co.uk/games"
@@ -46,7 +47,15 @@ def send_to_discord(message):
         print(f"Failed to send: {response.status_code}")
 
 if __name__ == '__main__':
+    # create the jackpots table if it doesn't exist
+    create_table()
+    # get the jackpots from the scraped data
     jackpots = get_jackpots()
+    # prepare the message for Discord
     message = format_for_notification(jackpots)
+    # write to the db
+    save_jackpots(jackpots)
+    # print a message to the terminal confirming it's run
     print("Sending to Discord:\n", message)
+    # send the message to Discord
     send_to_discord(message)
