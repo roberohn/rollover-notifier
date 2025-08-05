@@ -1,7 +1,8 @@
 import sqlite3
 from datetime import datetime
 
-DB_FILE = "jackpots.db"
+# using data/ so that the volume is persisted in Docker and isn't destroyed anytime the container is rebuilt
+DB_FILE = "data/jackpots.db"
 
 def create_table():
     with sqlite3.connect(DB_FILE) as conn:
@@ -16,6 +17,7 @@ def create_table():
         ''')
         conn.commit()
 
+# this when run will grab the game and amount values and insert them into the SQLite table long with the timestamp when run
 def save_jackpots(jackpots):
     timestamp = datetime.now().isoformat()
     with sqlite3.connect(DB_FILE) as conn:

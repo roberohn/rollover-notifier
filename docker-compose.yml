@@ -5,3 +5,8 @@ services:
     restart: always
     env_file:
       - .env
+    volumes:
+      - jackpot_data:/app/data
+
+volumes:
+  jackpot_data:
