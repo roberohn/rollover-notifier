@@ -18,7 +18,13 @@ def get_jackpots():
             game = name.replace('-jackpot-short', '').replace('-', ' ').title()
             jackpots[game] = content
 
-    return jackpots
+    jackpot_items = list(jackpots.items())
+    selected = {
+        jackpot_items[0][0]: jackpot_items[0][1],
+        jackpot_items[2][0]: jackpot_items[2][1]
+    }
+
+    return selected
 
 def format_for_notification(jackpots):
     today = date.today()
