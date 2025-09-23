@@ -30,7 +30,6 @@ def get_jackpots():
         jackpot_items = list(jackpots.items())
         selected = {
             jackpot_items[0][0]: jackpot_items[0][1],
-            #jackpot_items[2][0]: jackpot_items[2][1]
         }
 
         return selected
@@ -38,7 +37,6 @@ def get_jackpots():
     elif day_of_week == 1 or 4:
         jackpot_items = list(jackpots.items())
         selected = {
-            #jackpot_items[0][0]: jackpot_items[0][1],
             jackpot_items[2][0]: jackpot_items[2][1]
         }
 
