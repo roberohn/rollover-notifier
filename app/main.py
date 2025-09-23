@@ -5,6 +5,12 @@ from os import getenv
 from datetime import date
 from db import create_table, save_jackpots
 
+# Return today's date
+today = date.today()
+
+# Get day of week
+day_of_week = today.weekday()
+
 def get_jackpots():
     url = "https://www.national-lottery.co.uk/games"
     response = requests.get(url)
@@ -19,13 +25,24 @@ def get_jackpots():
             game = name.replace('-jackpot-short', '').replace('-', ' ').title()
             jackpots[game] = content
 
-    jackpot_items = list(jackpots.items())
-    selected = {
-        jackpot_items[0][0]: jackpot_items[0][1],
-        jackpot_items[2][0]: jackpot_items[2][1]
-    }
+    # Lottery
+    if day_of_week == 2 or 5:
+        jackpot_items = list(jackpots.items())
+        selected = {
+            jackpot_items[0][0]: jackpot_items[0][1],
+            #jackpot_items[2][0]: jackpot_items[2][1]
+        }
 
-    return selected
+        return selected
+    # Euromillions
+    elif day_of_week == 1 or 4:
+        jackpot_items = list(jackpots.items())
+        selected = {
+            #jackpot_items[0][0]: jackpot_items[0][1],
+            jackpot_items[2][0]: jackpot_items[2][1]
+        }
+
+        return selected
 
 def format_for_notification(jackpots):
     today = date.today()
