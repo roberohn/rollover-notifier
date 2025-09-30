@@ -11,22 +11,23 @@ today = date.today()
 # Get day of week
 day_of_week = today.weekday()
 
+
 def get_jackpots():
     url = "https://www.national-lottery.co.uk/games"
     response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    soup = BeautifulSoup(response.text, "html.parser")
 
     jackpots = {}
 
-    for meta in soup.find_all('meta'):
-        name = meta.get('name')
-        content = meta.get('content')
-        if name and content and 'jackpot-short' in name:
-            game = name.replace('-jackpot-short', '').replace('-', ' ').title()
+    for meta in soup.find_all("meta"):
+        name = meta.get("name")
+        content = meta.get("content")
+        if name and content and "jackpot-short" in name:
+            game = name.replace("-jackpot-short", "").replace("-", " ").title()
             jackpots[game] = content
 
     # Lottery
-    if day_of_week == 2 or 5:
+    if day_of_week in (2, 5):
         jackpot_items = list(jackpots.items())
         selected = {
             jackpot_items[0][0]: jackpot_items[0][1],
@@ -34,22 +35,22 @@ def get_jackpots():
 
         return selected
     # Euromillions
-    elif day_of_week == 1 or 4:
+    elif day_of_week in (1, 4):
         jackpot_items = list(jackpots.items())
-        selected = {
-            jackpot_items[2][0]: jackpot_items[2][1]
-        }
+        selected = {jackpot_items[2][0]: jackpot_items[2][1]}
 
         return selected
+
 
 def format_for_notification(jackpots):
     today = date.today()
     format_today = today.strftime("%d/%m/%Y")
     lines = [f"🎰 **National Lottery Daily Update {format_today}**"]
     for game, amount in jackpots.items():
-        game = game.replace('Next Draw', '').strip().title()
+        game = game.replace("Next Draw", "").strip().title()
         lines.append(f"- {game}: {amount}")
     return "\n".join(lines)
+
 
 def send_to_discord(message):
     load_dotenv()
@@ -61,7 +62,8 @@ def send_to_discord(message):
     else:
         print(f"Failed to send: {response.status_code}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # create the jackpots table if it doesn't exist
     create_table()
     # get the jackpots from the scraped data
